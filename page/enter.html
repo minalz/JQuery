@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        span {
+            color: transparent;
+        }
+    </style>
+    <script src="../lib/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+<form action="javascript: alert('提交成功');">
+    用户名：<input id="username" type="text" onkeydown="usernameValidate(this)" /><span id="usernameWarn"></span><br/><br/>
+    邮箱：<input id="mail" type="text" onkeydown="mailValidate(this)" /><span id="mailWarn"></span><br/><br/>
+    职业：<input id="job" type="text" onkeydown="jobValidate(this)" /><span id="jobWarn"></span><br/><br/>
+</form>
+<button οnclick="register()">注册</button>
+</body>
+<script type="text/javascript">
+    function usernameValidate(thisObj) {
+        var eventObj = window.event || arguments[0];
+        var spanEle = document.getElementById("usernameWarn");
+        spanEle.style.color = "transparent";
+        spanEle.innerHTML = "";
+        if (thisObj.value === "") {
+            spanEle.style.color = "red";
+            spanEle.innerHTML = "用户名不能为空！";
+        }
+        //按回车键，光标跳转到下一文本框中
+        if (eventObj.keyCode === 13) {
+            var inputEle = document.getElementById("mail")
+            inputEle.focus();
+        }
+    }
+
+    function mailValidate(thisObj) {
+        var eventObj = window.event || arguments[0];
+        var spanEle = document.getElementById("mailWarn");
+        spanEle.style.color = "transparent";
+        spanEle.innerHTML = "";
+        if (thisObj.value === "") {
+            spanEle.style.color = "red";
+            spanEle.innerHTML = "邮箱不能为空！";
+        }
+        if (eventObj.keyCode === 13) {
+            var inputEle = document.getElementById("job")
+            inputEle.focus();
+        }
+
+    }
+
+    function jobValidate(thisObj) {
+        var eventObj = window.event || arguments[0];
+        var spanEle = document.getElementById("jobWarn");
+        spanEle.style.color = "transparent";
+        spanEle.innerHTML = "";
+        if (thisObj.value === "") {
+            spanEle.style.color = "red";
+            spanEle.innerHTML = "职业不能为空！";
+        }
+        if (eventObj.keyCode === 13) {
+            register();
+        }
+
+    }
+
+    function register() {
+        var usernameEle = document.getElementById("username");
+        var mailEle = document.getElementById("mail");
+        var jobEle = document.getElementById("job");
+        var flag = true;
+        if (usernameEle.value === "") {
+            var spanEle = document.getElementById("usernameWarn");
+            flag = false;
+        }
+        if (mailEle.value === "") {
+            flag = false;
+        }
+        if (jobEle.value === "") {
+            flag = false;
+        }
+        if (!flag) {
+            alert("请检查");
+        } else {
+            window.document.forms[0].submit();
+        }
+
+        return flag;
+    }
+</script>
+</html>
